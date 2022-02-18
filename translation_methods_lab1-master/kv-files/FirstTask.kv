@@ -1,0 +1,107 @@
+<FirstTask>:
+    language: language
+    my_string: my_string
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: "Прокопенко Артур -- Лабораторная работа 1 (1)"
+            md_bg_color: [.8, 0, 0, .7]
+            elevation: 50
+            right_action_items: [["arrow-left", lambda x: root.previous_task()], ["arrow-right", lambda x: root.next_task()]]
+
+        BoxLayout:
+            size_hint: 1, 1
+
+            GridLayout:
+                cols: 1
+                rows: None
+                padding: 100
+                spacing: 30
+
+                Label:
+                    font_size: '36sp'
+                    size_hint: 1, 0.3
+                    text: "Алфавит"
+                    color: 1, 0, 0, 1
+                    multiline: False
+
+                GridLayout:
+                    cols: 2
+                    rows: None
+                    spacing: 30
+
+                    MDTextField:
+                        id: language
+                        font_size: '36sp'
+                        mode: "rectangle"
+                        hint_text: "Введите символы через запятую"
+                        helper_text: "Great!"
+                        helper_text_mode: "on_focus"
+                        write_tab: False
+
+                    Button:
+                        size_hint_x: .5
+                        font_size: '24sp'
+                        text: 'Загрузить алфавит'
+                        background_color: 0, 0, 0, 0
+                        canvas.before:
+                            Color:
+                                rgba: (0, .8, 0, .7) if self.state=='normal' else (0, .7, .7, 1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [35,]
+                        on_press: root.load_language()
+
+                Label:
+                    font_size: '30sp'
+                    color: 1, 0, 0, 1
+                    size_hint: 1, 0.3
+                    text: "Строка над алфавитом"
+
+                GridLayout:
+                    cols: 2
+                    rows: None
+                    spacing: 30
+
+                    MDTextField:
+                        id: my_string
+                        font_size: '36sp'
+                        mode: "rectangle"
+                        hint_text: "Введите строку"
+                        helper_text: "Great!"
+                        helper_text_mode: "on_focus"
+                        write_tab: False
+
+                    Button:
+                        size_hint_x: .5
+                        font_size: '24sp'
+                        text: 'Загрузить строку'
+                        background_color: 0, 0, 0, 0
+                        canvas.before:
+                            Color:
+                                rgba: (.8, .8, 0, .7) if self.state=='normal' else (0, .7, .7, 1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [35,]
+                        on_press: root.load_string()
+
+                Widget:
+
+                Button:
+                    text: 'Проверить'
+                    font_size: '30sp'
+                    background_color: 0, 0, 0, 0
+                    canvas.before:
+                        Color:
+                            rgba: (0, .8, .8, .7) if self.state=='normal' else (0, .7, .7, 1)
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [35,]
+                    on_press: root.check()
+
+                Widget:
